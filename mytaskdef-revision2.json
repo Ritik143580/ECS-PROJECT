@@ -1,13 +1,20 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:726608123348:task-definition/mytaskdef:2",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:726608123348:task-definition/taskdef1:1",
     "containerDefinitions": [
         {
-            "name": "mycontainer",
-            "image": "public.ecr.aws/nginx/nginx:mainline-alpine3.18-perl",
+            "name": "cont",
+            "image": "726608123348.dkr.ecr.us-east-1.amazonaws.com/newecr",
             "cpu": 0,
             "portMappings": [
                 {
-                    "name": "mynodeport",
+                    "name": "cont-80-tcp",
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                },
+                {
+                    "name": "nodeport",
                     "containerPort": 3000,
                     "hostPort": 3000,
                     "protocol": "tcp",
@@ -33,10 +40,10 @@
             "systemControls": []
         }
     ],
-    "family": "mytaskdef",
+    "family": "taskdef1",
     "executionRoleArn": "arn:aws:iam::726608123348:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 2,
+    "revision": 1,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -47,7 +54,13 @@
             "name": "ecs.capability.execution-role-awslogs"
         },
         {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
@@ -67,13 +80,13 @@
     "requiresCompatibilities": [
         "FARGATE"
     ],
-    "cpu": "1024",
-    "memory": "3072",
+    "cpu": "256",
+    "memory": "512",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-04-02T04:11:30.974Z",
+    "registeredAt": "2024-04-02T08:28:59.319Z",
     "registeredBy": "arn:aws:iam::726608123348:user/RITIKRATHORE",
     "tags": []
 }
